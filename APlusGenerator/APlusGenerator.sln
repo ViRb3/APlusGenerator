@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APlusGenerator", "APlusGenerator\APlusGenerator.csproj", "{57C97BB4-14B8-4ED5-847C-DDF8EC9A3C7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRCoder", "..\QRCoder\QRCoder\QRCoder.csproj", "{AECE5DF3-C379-46CA-BB7D-7BDBE59011FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57C97BB4-14B8-4ED5-847C-DDF8EC9A3C7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57C97BB4-14B8-4ED5-847C-DDF8EC9A3C7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57C97BB4-14B8-4ED5-847C-DDF8EC9A3C7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57C97BB4-14B8-4ED5-847C-DDF8EC9A3C7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AECE5DF3-C379-46CA-BB7D-7BDBE59011FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AECE5DF3-C379-46CA-BB7D-7BDBE59011FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AECE5DF3-C379-46CA-BB7D-7BDBE59011FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AECE5DF3-C379-46CA-BB7D-7BDBE59011FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
