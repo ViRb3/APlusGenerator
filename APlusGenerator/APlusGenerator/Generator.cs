@@ -51,6 +51,8 @@ namespace APlusGenerator
 
         public Tuple<Student, Bitmap[]>[] Generate(int count)
         {
+            //TODO: Add encryption
+            
             QRCodeGenerator generator = new QRCodeGenerator();
             List<Tuple<Student, Bitmap[]>> results = new List<Tuple<Student, Bitmap[]>>();
 

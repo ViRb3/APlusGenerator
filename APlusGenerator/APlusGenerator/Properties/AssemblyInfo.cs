@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("APlusGenerator")]
-[assembly: AssemblyDescription("An application aiming to create truly anonymous school examination sheets while keeping things simple.")]
+[assembly: AssemblyDescription("A code generator for the APlus project")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("APlusGenerator")]
