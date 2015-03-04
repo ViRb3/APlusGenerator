@@ -11,7 +11,7 @@ namespace APlusGenerator
 {
     public partial class MainForm : Form
     {
-        private readonly List<Student> _students = new List<Student>();
+        public List<Student> Students = new List<Student>();
 
         public MainForm()
         {
@@ -20,7 +20,7 @@ namespace APlusGenerator
 
         private void btnGenerateFromFile_Click(object sender, EventArgs e)
         {
-            //TODO: Add threaded loading
+            //TODO: Implement threaded loading
             var openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Text files|*.txt";
             openFileDialog.Title = "Select list to load...";
@@ -33,11 +33,11 @@ namespace APlusGenerator
             try
             {
                 foreach (string line in list)
-                _students.Add(new Student(line));
+                Students.Add(new Student(line));
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -46,20 +46,7 @@ namespace APlusGenerator
 
         private void btnGenerateSingle_Click(object sender, EventArgs e)
         {
-            //TODO: Form for single student
-        }
-
-        private void UpdateStudentsList()
-        {
-            listViewStudents.BeginUpdate();
-
-            while (listViewStudents.Items.Count > 0)
-                listViewStudents.Items.RemoveAt(0);
-
-            foreach (var student in _students)
-                listViewStudents.Items.Add(new ListViewItem(new[] {student.FirstName, student.LastName, student.Class}));
-
-            listViewStudents.EndUpdate();
+            new SingleStudentForm(this).ShowDialog();
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
@@ -92,7 +79,7 @@ namespace APlusGenerator
 
                     string folder = folderDialog.SelectedPath;
 
-                    var generator = new Generator(_students);
+                    var generator = new Generator(Students);
                     int codesCount = -1;
                     numCodes.BeginInvoke(new MethodInvoker(() => codesCount = Convert.ToInt32(numCodes.Value)));
 
@@ -116,7 +103,7 @@ namespace APlusGenerator
                         }
                     }
 
-                    MessageBox.Show("All done!");
+                    MessageBox.Show("All done!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 });
             }
             finally
@@ -125,6 +112,19 @@ namespace APlusGenerator
                 btnGenerateSingle.Enabled = true;
                 btnGenerate.Enabled = true;
             }    
+        }
+
+        public void UpdateStudentsList()
+        {
+            listViewStudents.BeginUpdate();
+
+            while (listViewStudents.Items.Count > 0)
+                listViewStudents.Items.RemoveAt(0);
+
+            foreach (var student in Students)
+                listViewStudents.Items.Add(new ListViewItem(new[] { student.FirstName, student.LastName, student.Class }));
+
+            listViewStudents.EndUpdate();
         }
     }
 }

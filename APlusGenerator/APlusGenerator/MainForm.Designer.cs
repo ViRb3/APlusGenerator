@@ -60,7 +60,7 @@
             this.btnGenerateSingle.Location = new System.Drawing.Point(150, 48);
             this.btnGenerateSingle.Name = "btnGenerateSingle";
             this.btnGenerateSingle.Size = new System.Drawing.Size(158, 28);
-            this.btnGenerateSingle.TabIndex = 0;
+            this.btnGenerateSingle.TabIndex = 1;
             this.btnGenerateSingle.Text = "Generate single student code";
             this.btnGenerateSingle.UseVisualStyleBackColor = true;
             this.btnGenerateSingle.Click += new System.EventHandler(this.btnGenerateSingle_Click);
@@ -84,7 +84,7 @@
             this.lblWelcome.Location = new System.Drawing.Point(6, 16);
             this.lblWelcome.Name = "lblWelcome";
             this.lblWelcome.Size = new System.Drawing.Size(302, 13);
-            this.lblWelcome.TabIndex = 2;
+            this.lblWelcome.TabIndex = 0;
             this.lblWelcome.Text = "Welcome! Select an option to start generating student codes...";
             // 
             // groupStudents
@@ -114,6 +114,7 @@
             this.listViewStudents.Name = "listViewStudents";
             this.listViewStudents.Size = new System.Drawing.Size(316, 263);
             this.listViewStudents.TabIndex = 0;
+            this.listViewStudents.TabStop = false;
             this.listViewStudents.UseCompatibleStateImageBehavior = false;
             this.listViewStudents.View = System.Windows.Forms.View.Details;
             // 
@@ -142,7 +143,7 @@
             0});
             this.numCodes.Name = "numCodes";
             this.numCodes.Size = new System.Drawing.Size(56, 20);
-            this.numCodes.TabIndex = 5;
+            this.numCodes.TabIndex = 2;
             this.numCodes.Value = new decimal(new int[] {
             1,
             0,
@@ -165,7 +166,7 @@
             this.btnGenerate.Location = new System.Drawing.Point(253, 403);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(87, 23);
-            this.btnGenerate.TabIndex = 7;
+            this.btnGenerate.TabIndex = 3;
             this.btnGenerate.Text = "Generate";
             this.btnGenerate.UseVisualStyleBackColor = true;
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
@@ -181,6 +182,7 @@
             this.Controls.Add(this.groupStudents);
             this.Controls.Add(this.groupWelcome);
             this.Name = "MainForm";
+            this.ShowIcon = false;
             this.Text = "APlus QR Generator ~ViRb3";
             this.groupWelcome.ResumeLayout(false);
             this.groupWelcome.PerformLayout();
@@ -198,13 +200,13 @@
         private System.Windows.Forms.GroupBox groupWelcome;
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.GroupBox groupStudents;
-        private System.Windows.Forms.ListView listViewStudents;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.NumericUpDown numCodes;
         private System.Windows.Forms.Label lblCodes;
         private System.Windows.Forms.Button btnGenerate;
+        private System.Windows.Forms.ListView listViewStudents;
     }
 }
 

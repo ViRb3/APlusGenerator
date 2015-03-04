@@ -1,18 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using QRCoder;
+using Gma.QrCodeNet.Encoding;
+using Gma.QrCodeNet.Encoding.Windows.Render;
 
 namespace APlusGenerator
 {
-    class Student
+    public class Student
     {
         public string FirstName, LastName, Class;
 
         public Student(string firstName, string lastName, string @class)
         {
+            if (string.IsNullOrWhiteSpace(firstName))
+                throw new Exception("Invalid first name!");
+
+            if (string.IsNullOrWhiteSpace(lastName))
+                throw new Exception("Invalid last name!");
+
+            if (string.IsNullOrWhiteSpace(@class))
+                throw new Exception("Invalid class!");
+
             FirstName = firstName;
             LastName = lastName;
             Class = @class;
@@ -37,35 +50,48 @@ namespace APlusGenerator
 
         public string GetEncryptedData()
         {
-            return Encrypt(GetData());
+            string base64 = Encrypt(GetData());
+            return base64;
         }
 
-        private string Encrypt(string code)
+        private string Encrypt(string data)
         {
-            byte[] codeBytes = Encoding.UTF8.GetBytes(code);
+            byte[] dataBytes = Encoding.UTF8.GetBytes(data);
 
-            for (int i = 0; i < codeBytes.Length; i++)
+            using (AesManaged aes = new AesManaged())
             {
-                codeBytes[i] = (byte)(codeBytes[i] ^ GetCode());
-            }
+                aes.Key = GetCode();
+                aes.GenerateIV();
 
-            return Convert.ToBase64String(codeBytes);
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    memoryStream.Write(aes.IV, 0, 16);
+
+                    using (var cryptoStream = new CryptoStream(memoryStream, aes.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cryptoStream.Write(dataBytes, 0, dataBytes.Length);
+                    }
+
+                    byte[] encryptedBytes = memoryStream.ToArray();
+                    return Convert.ToBase64String(encryptedBytes);
+                }
+            }
         }
 
-        private int GetCode()
+        private byte[] GetCode()
         {
             int code = 0;
 
             foreach (char @char in "APlus")
                 code += @char;
 
-            return code;
+            return MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(code.ToString()));
         }
     }
 
-    class Generator
+    internal class Generator
     {
-        private readonly List<Student> _students = new List<Student>(); 
+        private readonly List<Student> _students = new List<Student>();
 
         public Generator(Student student)
         {
@@ -78,8 +104,11 @@ namespace APlusGenerator
         }
 
         public Tuple<Student, Bitmap[]>[] Generate(int count)
-        {           
-            QRCodeGenerator generator = new QRCodeGenerator();
+        {
+            var renderer = new GraphicsRenderer(new FixedModuleSize(5, QuietZoneModules.Two), Brushes.Black, Brushes.White);
+            QrEncoder encoder = new QrEncoder();
+            encoder.ErrorCorrectionLevel = ErrorCorrectionLevel.L;
+
             List<Tuple<Student, Bitmap[]>> results = new List<Tuple<Student, Bitmap[]>>();
 
             foreach (var student in _students)
@@ -87,7 +116,16 @@ namespace APlusGenerator
                 List<Bitmap> codes = new List<Bitmap>();
 
                 for (int i = 0; i < count; i++)
-                    codes.Add(generator.CreateQrCode(student.GetEncryptedData(), QRCodeGenerator.ECCLevel.H).GetGraphic(20));
+                {
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        renderer.WriteToStream(encoder.Encode(student.GetEncryptedData()).Matrix, ImageFormat.Png, memoryStream);
+                        memoryStream.Seek(0, SeekOrigin.Begin);
+
+                        codes.Add(new Bitmap(memoryStream));
+                    }
+                }
+                
 
                 results.Add(new Tuple<Student, Bitmap[]>(student, codes.ToArray()));
             }
