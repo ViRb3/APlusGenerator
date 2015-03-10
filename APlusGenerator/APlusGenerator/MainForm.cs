@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace APlusGenerator
             if (openFileDialog.ShowDialog() != DialogResult.OK || !openFileDialog.CheckFileExists)
                 return;
 
-            string[] list = Regex.Split(File.ReadAllText(openFileDialog.FileName).Trim(), Environment.NewLine);
+            string[] list = Regex.Split(File.ReadAllText(openFileDialog.FileName, Encoding.UTF8).Trim(), Environment.NewLine);
 
             try
             {

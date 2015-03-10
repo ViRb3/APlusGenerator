@@ -38,9 +38,9 @@ namespace APlusGenerator
             if (dataArray.Length != 3)
                 throw new Exception("Invalid FirstName:LastName:Class line!");
 
-            FirstName = dataArray[0];
-            LastName = dataArray[1];
-            Class = dataArray[2];
+            FirstName = dataArray[0].Trim();
+            LastName = dataArray[1].Trim();
+            Class = dataArray[2].Trim();
         }
 
         public string GetData()
