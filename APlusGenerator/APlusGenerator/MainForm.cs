@@ -127,5 +127,17 @@ namespace APlusGenerator
 
             listViewStudents.EndUpdate();
         }
+
+        private void removeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listViewStudents.SelectedItems.Count < 1) 
+                return;
+
+            foreach (ListViewItem item in listViewStudents.SelectedItems)
+            {
+                Students.RemoveAt(item.Index);
+                item.Remove();  
+            }
+        }
     }
 }

@@ -28,20 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnGenerateFromFile = new System.Windows.Forms.Button();
             this.btnGenerateSingle = new System.Windows.Forms.Button();
             this.groupWelcome = new System.Windows.Forms.GroupBox();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.groupStudents = new System.Windows.Forms.GroupBox();
-            this.listViewStudents = new System.Windows.Forms.ListView();
+            this.txtListEdit = new System.Windows.Forms.TextBox();
+            this.listViewStudents = new EditableListView(txtListEdit);
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.numCodes = new System.Windows.Forms.NumericUpDown();
             this.lblCodes = new System.Windows.Forms.Label();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.groupWelcome.SuspendLayout();
             this.groupStudents.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCodes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,6 +97,7 @@
             this.groupStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupStudents.Controls.Add(this.txtListEdit);
             this.groupStudents.Controls.Add(this.listViewStudents);
             this.groupStudents.Location = new System.Drawing.Point(12, 105);
             this.groupStudents.MinimumSize = new System.Drawing.Size(328, 288);
@@ -100,6 +106,14 @@
             this.groupStudents.TabIndex = 4;
             this.groupStudents.TabStop = false;
             this.groupStudents.Text = "Students";
+            // 
+            // txtListEdit
+            // 
+            this.txtListEdit.Location = new System.Drawing.Point(222, 262);
+            this.txtListEdit.Name = "txtListEdit";
+            this.txtListEdit.Size = new System.Drawing.Size(100, 20);
+            this.txtListEdit.TabIndex = 7;
+            this.txtListEdit.Visible = false;
             // 
             // listViewStudents
             // 
@@ -110,6 +124,8 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
+            this.listViewStudents.ContextMenuStrip = this.contextMenuStrip1;
+            this.listViewStudents.FullRowSelect = true;
             this.listViewStudents.Location = new System.Drawing.Point(6, 19);
             this.listViewStudents.Name = "listViewStudents";
             this.listViewStudents.Size = new System.Drawing.Size(316, 263);
@@ -131,6 +147,20 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Class";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.removeToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(118, 26);
+            // 
+            // removeToolStripMenuItem
+            // 
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.removeToolStripMenuItem.Text = "Remove";
+            this.removeToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
             // 
             // numCodes
             // 
@@ -187,6 +217,8 @@
             this.groupWelcome.ResumeLayout(false);
             this.groupWelcome.PerformLayout();
             this.groupStudents.ResumeLayout(false);
+            this.groupStudents.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numCodes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -206,7 +238,10 @@
         private System.Windows.Forms.NumericUpDown numCodes;
         private System.Windows.Forms.Label lblCodes;
         private System.Windows.Forms.Button btnGenerate;
-        private System.Windows.Forms.ListView listViewStudents;
+        private EditableListView listViewStudents;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
+        private System.Windows.Forms.TextBox txtListEdit;
     }
 }
 

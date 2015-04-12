@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditableListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Generator.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
