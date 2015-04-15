@@ -5,7 +5,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.RegularExpressions;
 using Gma.QrCodeNet.Encoding;
 using Gma.QrCodeNet.Encoding.Windows.Render;
 
@@ -55,42 +54,28 @@ namespace APlusGenerator
             byte[] dataBytes = Encoding.UTF8.GetBytes(data);
             const string key = @"v0,|m4Q/9K9mN'z*{RGL0@7eL2R8pHq4";
 
-            using (RijndaelManaged rijndael = new RijndaelManaged())
+            using (var rijndael = new RijndaelManaged())
             {
                 rijndael.Padding = PaddingMode.PKCS7;
                 rijndael.BlockSize = 256;
                 rijndael.KeySize = 256;
                 rijndael.GenerateIV();
-                rijndael.IV = XorIV(rijndael.IV);
+
                 rijndael.Key = Encoding.UTF8.GetBytes(key);
 
                 using (var memoryStream = new MemoryStream())
-                using (CryptoStream cryptoStream = new CryptoStream(memoryStream, rijndael.CreateEncryptor(), CryptoStreamMode.Write))
+                using (var cryptoStream = new CryptoStream(memoryStream, rijndael.CreateEncryptor(), CryptoStreamMode.Write))
                 {
                     cryptoStream.Write(dataBytes, 0, dataBytes.Length);
                     cryptoStream.FlushFinalBlock();
+
                     memoryStream.Write(rijndael.IV, 0, rijndael.IV.Length);
-                    cryptoStream.Close();
 
                     data = Convert.ToBase64String(memoryStream.ToArray());
                 }
             }
 
             return data;
-        }
-
-        private byte[] XorIV(byte[] IV)
-        {
-            const int increaser = 12;
-            Int64 startNumber = 18514;
-
-            for (int i = 0; i < IV.Length; i++)
-            {
-                IV[i] = (byte)(IV[i] ^ startNumber);
-                startNumber += increaser;
-            }
-
-            return IV;
         }
     }
 
@@ -110,27 +95,29 @@ namespace APlusGenerator
 
         public Tuple<Student, Bitmap[]>[] Generate(int count)
         {
-            var renderer = new GraphicsRenderer(new FixedModuleSize(5, QuietZoneModules.Two), Brushes.Black, Brushes.White);
-            QrEncoder encoder = new QrEncoder();
+            var renderer = new GraphicsRenderer(new FixedModuleSize(5, QuietZoneModules.Two), Brushes.Black,
+                Brushes.White);
+            var encoder = new QrEncoder();
             encoder.ErrorCorrectionLevel = ErrorCorrectionLevel.L;
 
-            List<Tuple<Student, Bitmap[]>> results = new List<Tuple<Student, Bitmap[]>>();
+            var results = new List<Tuple<Student, Bitmap[]>>();
 
-            foreach (var student in _students)
+            foreach (Student student in _students)
             {
-                List<Bitmap> codes = new List<Bitmap>();
+                var codes = new List<Bitmap>();
 
-                for (int i = 0; i < count; i++)
+                for (var i = 0; i < count; i++)
                 {
-                    using (MemoryStream memoryStream = new MemoryStream())
+                    using (var memoryStream = new MemoryStream())
                     {
-                        renderer.WriteToStream(encoder.Encode(student.GetEncryptedData()).Matrix, ImageFormat.Png, memoryStream);
+                        renderer.WriteToStream(encoder.Encode(student.GetEncryptedData()).Matrix, ImageFormat.Png,
+                            memoryStream);
                         memoryStream.Seek(0, SeekOrigin.Begin);
 
                         codes.Add(new Bitmap(memoryStream));
                     }
                 }
-                
+
 
                 results.Add(new Tuple<Student, Bitmap[]>(student, codes.ToArray()));
             }
