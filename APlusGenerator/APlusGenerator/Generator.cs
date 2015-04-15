@@ -13,9 +13,9 @@ namespace APlusGenerator
 {
     public class Student
     {
-        public string FirstName, LastName, Class;
+        public string EMail, FirstName, LastName, Class;
 
-        public Student(string firstName, string lastName, string @class)
+        private Student(string firstName, string lastName, string @class)
         {
             if (string.IsNullOrWhiteSpace(firstName))
                 throw new Exception("Invalid first name!");
@@ -31,21 +31,17 @@ namespace APlusGenerator
             Class = @class;
         }
 
-        public Student(string data)
+        public Student(string email)
         {
-            string[] dataArray = Regex.Split(data, ":");
+            if (!RegexUtilities.IsValidEmail(email))
+                throw new Exception("Invalid E-mail!");
 
-            if (dataArray.Length != 3)
-                throw new Exception("Invalid FirstName:LastName:Class line!");
-
-            FirstName = dataArray[0].Trim();
-            LastName = dataArray[1].Trim();
-            Class = dataArray[2].Trim();
+            EMail = email;
         }
 
         public string GetData()
         {
-            return string.Format("{0}:{1}:{2}", FirstName, LastName, Class);
+            return EMail;
         }
 
         public string GetEncryptedData()
@@ -57,35 +53,44 @@ namespace APlusGenerator
         private string Encrypt(string data)
         {
             byte[] dataBytes = Encoding.UTF8.GetBytes(data);
+            const string key = @"v0,|m4Q/9K9mN'z*{RGL0@7eL2R8pHq4";
 
-            using (AesManaged aes = new AesManaged())
+            using (RijndaelManaged rijndael = new RijndaelManaged())
             {
-                aes.Key = GetCode();
-                aes.GenerateIV();
+                rijndael.Padding = PaddingMode.PKCS7;
+                rijndael.BlockSize = 256;
+                rijndael.KeySize = 256;
+                rijndael.GenerateIV();
+                rijndael.IV = XorIV(rijndael.IV);
+                rijndael.Key = Encoding.UTF8.GetBytes(key);
 
-                using (MemoryStream memoryStream = new MemoryStream())
+                using (var memoryStream = new MemoryStream())
+                using (CryptoStream cryptoStream = new CryptoStream(memoryStream, rijndael.CreateEncryptor(), CryptoStreamMode.Write))
                 {
-                    memoryStream.Write(aes.IV, 0, 16);
+                    cryptoStream.Write(dataBytes, 0, dataBytes.Length);
+                    cryptoStream.FlushFinalBlock();
+                    memoryStream.Write(rijndael.IV, 0, rijndael.IV.Length);
+                    cryptoStream.Close();
 
-                    using (var cryptoStream = new CryptoStream(memoryStream, aes.CreateEncryptor(), CryptoStreamMode.Write))
-                    {
-                        cryptoStream.Write(dataBytes, 0, dataBytes.Length);
-                    }
-
-                    byte[] encryptedBytes = memoryStream.ToArray();
-                    return Convert.ToBase64String(encryptedBytes);
+                    data = Convert.ToBase64String(memoryStream.ToArray());
                 }
             }
+
+            return data;
         }
 
-        private byte[] GetCode()
+        private byte[] XorIV(byte[] IV)
         {
-            int code = 0;
+            const int increaser = 12;
+            Int64 startNumber = 18514;
 
-            foreach (char @char in "APlus")
-                code += @char;
+            for (int i = 0; i < IV.Length; i++)
+            {
+                IV[i] = (byte)(IV[i] ^ startNumber);
+                startNumber += increaser;
+            }
 
-            return MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(code.ToString()));
+            return IV;
         }
     }
 

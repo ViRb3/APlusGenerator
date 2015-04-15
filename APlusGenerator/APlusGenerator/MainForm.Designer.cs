@@ -37,8 +37,6 @@
             this.txtListEdit = new System.Windows.Forms.TextBox();
             this.listViewStudents = new EditableListView(txtListEdit);
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.numCodes = new System.Windows.Forms.NumericUpDown();
@@ -121,11 +119,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewStudents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader1});
             this.listViewStudents.ContextMenuStrip = this.contextMenuStrip1;
             this.listViewStudents.FullRowSelect = true;
+            this.listViewStudents.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewStudents.Location = new System.Drawing.Point(6, 19);
             this.listViewStudents.Name = "listViewStudents";
             this.listViewStudents.Size = new System.Drawing.Size(316, 263);
@@ -136,17 +133,7 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "First name";
-            this.columnHeader1.Width = 104;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Last name";
-            this.columnHeader2.Width = 108;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Class";
+            this.columnHeader1.Text = "E-mail";
             // 
             // contextMenuStrip1
             // 
@@ -232,9 +219,6 @@
         private System.Windows.Forms.GroupBox groupWelcome;
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.GroupBox groupStudents;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.NumericUpDown numCodes;
         private System.Windows.Forms.Label lblCodes;
         private System.Windows.Forms.Button btnGenerate;
@@ -242,6 +226,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
         private System.Windows.Forms.TextBox txtListEdit;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }
 

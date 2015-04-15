@@ -34,7 +34,7 @@ namespace APlusGenerator
             try
             {
                 foreach (string line in list)
-                Students.Add(new Student(line));
+                    Students.Add(new Student(line));
             }
             catch(Exception ex)
             {
@@ -91,9 +91,7 @@ namespace APlusGenerator
 
                     foreach (Tuple<Student, Bitmap[]> studentCodes in codes)
                     {
-                        string newFolder = Path.Combine(folder,
-                            string.Format("{0}_{1}_{2}", studentCodes.Item1.FirstName, studentCodes.Item1.LastName,
-                                studentCodes.Item1.Class));
+                        string newFolder = Path.Combine(folder, studentCodes.Item1.EMail);
 
                         Directory.CreateDirectory(newFolder);
 
@@ -123,7 +121,9 @@ namespace APlusGenerator
                 listViewStudents.Items.RemoveAt(0);
 
             foreach (var student in Students)
-                listViewStudents.Items.Add(new ListViewItem(new[] { student.FirstName, student.LastName, student.Class }));
+                listViewStudents.Items.Add(new ListViewItem(new[] { student.EMail }));
+
+            listViewStudents.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 
             listViewStudents.EndUpdate();
         }

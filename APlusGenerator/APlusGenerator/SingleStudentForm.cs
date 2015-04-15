@@ -17,7 +17,7 @@ namespace APlusGenerator
         {
             try
             {
-                var student = new Student(txtFirstName.Text.Trim(), txtLastName.Text.Trim(), txtClass.Text.Trim());
+                var student = new Student(txtEmail.Text.Trim());
                 _mainForm.Students.Add(student);
                 _mainForm.UpdateStudentsList();
             }
