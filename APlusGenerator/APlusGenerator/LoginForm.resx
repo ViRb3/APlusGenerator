@@ -160,7 +160,7 @@
     <value>106, 30</value>
   </data>
   <data name="btnLogin.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="btnLogin.Text" xml:space="preserve">
     <value>Log in</value>
@@ -176,6 +176,9 @@
   </data>
   <data name="&gt;&gt;btnLogin.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="txtPassword.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Italic</value>
   </data>
   <data name="txtPassword.Location" type="System.Drawing.Point, System.Drawing">
     <value>92, 67</value>
@@ -204,6 +207,9 @@
   <data name="&gt;&gt;txtPassword.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="txtEmail.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Italic</value>
+  </data>
   <data name="txtEmail.Location" type="System.Drawing.Point, System.Drawing">
     <value>92, 41</value>
   </data>
@@ -211,7 +217,7 @@
     <value>146, 20</value>
   </data>
   <data name="txtEmail.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="txtEmail.Text" xml:space="preserve">
     <value>E-mail</value>
@@ -236,6 +242,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>337, 166</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Login</value>

@@ -49,15 +49,15 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.ForeColor = System.Drawing.Color.Gray;
             resources.ApplyResources(this.txtPassword, "txtPassword");
+            this.txtPassword.ForeColor = System.Drawing.Color.Gray;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.WatermarkText = "Password";
             // 
             // txtEmail
             // 
-            this.txtEmail.ForeColor = System.Drawing.Color.Gray;
             resources.ApplyResources(this.txtEmail, "txtEmail");
+            this.txtEmail.ForeColor = System.Drawing.Color.Gray;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.WatermarkText = "E-mail";
             // 
