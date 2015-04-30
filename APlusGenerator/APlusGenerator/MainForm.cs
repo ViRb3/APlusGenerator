@@ -12,11 +12,13 @@ namespace APlusGenerator
 {
     public partial class MainForm : Form
     {
+        public static TextBox TxtListEdit;
         public List<Student> Students = new List<Student>();
 
         public MainForm()
         {
             InitializeComponent();
+            TxtListEdit = txtListEdit;
         }
 
         private void btnGenerateFromFile_Click(object sender, EventArgs e)

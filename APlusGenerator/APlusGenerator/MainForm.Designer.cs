@@ -35,7 +35,7 @@
             this.lblWelcome = new System.Windows.Forms.Label();
             this.groupStudents = new System.Windows.Forms.GroupBox();
             this.txtListEdit = new System.Windows.Forms.TextBox();
-            this.listViewStudents = new EditableListView(txtListEdit);
+            this.listViewStudents = new EditableListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();

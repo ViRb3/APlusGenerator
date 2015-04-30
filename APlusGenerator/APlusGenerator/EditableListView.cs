@@ -8,25 +8,25 @@ namespace APlusGenerator
     {
         private const int WM_HSCROLL = 0x114;
         private const int WM_VSCROLL = 0x115;
-        private readonly TextBox _txtListEdit;
+
+        public TextBox TxtListEdit
+        {
+            get { return MainForm.TxtListEdit; }
+        }
+
         private Point _dragPoint;
         private ListViewItem.ListViewSubItem _selectedItem;
         private bool _updating;
 
-        public EditableListView(TextBox editTextBox)
-        {
-            _txtListEdit = editTextBox;
-        }
-
         private void HideTextEditor()
         {
-            _txtListEdit.Visible = false;
+            TxtListEdit.Visible = false;
 
             if (_selectedItem != null)
-                _selectedItem.Text = _txtListEdit.Text;
+                _selectedItem.Text = TxtListEdit.Text;
 
             _selectedItem = null;
-            _txtListEdit.Text = string.Empty;
+            TxtListEdit.Text = string.Empty;
 
             DeselectAll();
         }
@@ -66,13 +66,13 @@ namespace APlusGenerator
             if (selectedItemInfo.SubItem == selectedItemInfo.Item.SubItems[0])
                 cellWidth = this.Columns[0].Width;
 
-            _txtListEdit.Location = new Point(cellLeft, cellTop);
-            _txtListEdit.Size = new Size(cellWidth, cellHeight);
-            _txtListEdit.Visible = true;
-            _txtListEdit.BringToFront();
-            _txtListEdit.Text = selectedItemInfo.SubItem.Text;
-            _txtListEdit.Select();
-            _txtListEdit.SelectAll();
+            TxtListEdit.Location = new Point(cellLeft, cellTop);
+            TxtListEdit.Size = new Size(cellWidth, cellHeight);
+            TxtListEdit.Visible = true;
+            TxtListEdit.BringToFront();
+            TxtListEdit.Text = selectedItemInfo.SubItem.Text;
+            TxtListEdit.Select();
+            TxtListEdit.SelectAll();
 
             _updating = false;
 
