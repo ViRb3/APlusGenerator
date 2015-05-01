@@ -2,6 +2,7 @@
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
+using System.Text;
 
 namespace APlusGenerator
 {
@@ -13,7 +14,17 @@ namespace APlusGenerator
 
 		public static string Request(NameValueCollection data)
 		{
-			byte[] response = WebClient.UploadValues(Server, "POST", data);
+		    byte[] response;
+
+		    try
+		    {
+                response = WebClient.UploadValues(Server, "POST", data);
+		    }
+		    catch (WebException e)
+		    {
+		        return e.Message;
+		    }
+
 			string result = WebClient.Encoding.GetString(response);
 
 			if (result != "Login success!")
@@ -37,6 +48,11 @@ namespace APlusGenerator
 
 	class BetterWebClient : WebClient
 	{
+        public BetterWebClient()
+	    {
+	        this.Encoding = Encoding.UTF8;
+	    }
+
 		public CookieContainer CookieJar = new CookieContainer();
 
 		protected override WebRequest GetWebRequest(Uri address)

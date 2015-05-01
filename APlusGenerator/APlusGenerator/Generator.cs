@@ -14,8 +14,11 @@ namespace APlusGenerator
     {
         public string EMail, FirstName, LastName, Class;
 
-        private Student(string firstName, string lastName, string @class)
+        public Student(string email, string firstName, string lastName, string @class)
         {
+            if (!RegexUtilities.IsValidEmail(email))
+                throw new Exception("Invalid E-mail!");
+
             if (string.IsNullOrWhiteSpace(firstName))
                 throw new Exception("Invalid first name!");
 
@@ -25,17 +28,10 @@ namespace APlusGenerator
             if (string.IsNullOrWhiteSpace(@class))
                 throw new Exception("Invalid class!");
 
+            EMail = email;
             FirstName = firstName;
             LastName = lastName;
             Class = @class;
-        }
-
-        public Student(string email)
-        {
-            if (!RegexUtilities.IsValidEmail(email))
-                throw new Exception("Invalid E-mail!");
-
-            EMail = email;
         }
 
         public string GetData()

@@ -1,4 +1,6 @@
-﻿namespace APlusGenerator
+﻿using System.Windows.Forms;
+
+namespace APlusGenerator
 {
     partial class MainForm
     {
@@ -29,14 +31,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btnGenerateFromFile = new System.Windows.Forms.Button();
-            this.btnGenerateSingle = new System.Windows.Forms.Button();
+            this.btnSelectStudents = new System.Windows.Forms.Button();
             this.groupWelcome = new System.Windows.Forms.GroupBox();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.groupStudents = new System.Windows.Forms.GroupBox();
-            this.txtListEdit = new System.Windows.Forms.TextBox();
-            this.listViewStudents = new EditableListView();
+            this.listViewStudents = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.numCodes = new System.Windows.Forms.NumericUpDown();
@@ -48,33 +51,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.numCodes)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnGenerateFromFile
+            // btnSelectStudents
             // 
-            this.btnGenerateFromFile.Location = new System.Drawing.Point(9, 48);
-            this.btnGenerateFromFile.Name = "btnGenerateFromFile";
-            this.btnGenerateFromFile.Size = new System.Drawing.Size(135, 28);
-            this.btnGenerateFromFile.TabIndex = 0;
-            this.btnGenerateFromFile.Text = "Generate codes from file";
-            this.btnGenerateFromFile.UseVisualStyleBackColor = true;
-            this.btnGenerateFromFile.Click += new System.EventHandler(this.btnGenerateFromFile_Click);
-            // 
-            // btnGenerateSingle
-            // 
-            this.btnGenerateSingle.Location = new System.Drawing.Point(150, 48);
-            this.btnGenerateSingle.Name = "btnGenerateSingle";
-            this.btnGenerateSingle.Size = new System.Drawing.Size(158, 28);
-            this.btnGenerateSingle.TabIndex = 1;
-            this.btnGenerateSingle.Text = "Generate single student code";
-            this.btnGenerateSingle.UseVisualStyleBackColor = true;
-            this.btnGenerateSingle.Click += new System.EventHandler(this.btnGenerateSingle_Click);
+            this.btnSelectStudents.Location = new System.Drawing.Point(68, 45);
+            this.btnSelectStudents.Name = "btnSelectStudents";
+            this.btnSelectStudents.Size = new System.Drawing.Size(168, 28);
+            this.btnSelectStudents.TabIndex = 0;
+            this.btnSelectStudents.Text = "Select students";
+            this.btnSelectStudents.UseVisualStyleBackColor = true;
+            this.btnSelectStudents.Click += new System.EventHandler(this.btnSelectStudents_Click);
             // 
             // groupWelcome
             // 
             this.groupWelcome.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupWelcome.Controls.Add(this.lblWelcome);
-            this.groupWelcome.Controls.Add(this.btnGenerateFromFile);
-            this.groupWelcome.Controls.Add(this.btnGenerateSingle);
+            this.groupWelcome.Controls.Add(this.btnSelectStudents);
             this.groupWelcome.Location = new System.Drawing.Point(12, 12);
             this.groupWelcome.Name = "groupWelcome";
             this.groupWelcome.Size = new System.Drawing.Size(328, 87);
@@ -86,16 +78,15 @@
             this.lblWelcome.AutoSize = true;
             this.lblWelcome.Location = new System.Drawing.Point(6, 16);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(302, 13);
+            this.lblWelcome.Size = new System.Drawing.Size(282, 13);
             this.lblWelcome.TabIndex = 0;
-            this.lblWelcome.Text = "Welcome! Select an option to start generating student codes...";
+            this.lblWelcome.Text = "You can select students to generate codes for from below:";
             // 
             // groupStudents
             // 
             this.groupStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupStudents.Controls.Add(this.txtListEdit);
             this.groupStudents.Controls.Add(this.listViewStudents);
             this.groupStudents.Location = new System.Drawing.Point(12, 105);
             this.groupStudents.MinimumSize = new System.Drawing.Size(328, 288);
@@ -105,21 +96,16 @@
             this.groupStudents.TabStop = false;
             this.groupStudents.Text = "Students";
             // 
-            // txtListEdit
-            // 
-            this.txtListEdit.Location = new System.Drawing.Point(222, 262);
-            this.txtListEdit.Name = "txtListEdit";
-            this.txtListEdit.Size = new System.Drawing.Size(100, 20);
-            this.txtListEdit.TabIndex = 7;
-            this.txtListEdit.Visible = false;
-            // 
             // listViewStudents
             // 
             this.listViewStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewStudents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
             this.listViewStudents.ContextMenuStrip = this.contextMenuStrip1;
             this.listViewStudents.FullRowSelect = true;
             this.listViewStudents.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -134,6 +120,20 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "E-mail";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "First name";
+            this.columnHeader2.Width = 63;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Last name";
+            this.columnHeader3.Width = 70;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Class";
             // 
             // contextMenuStrip1
             // 
@@ -204,7 +204,6 @@
             this.groupWelcome.ResumeLayout(false);
             this.groupWelcome.PerformLayout();
             this.groupStudents.ResumeLayout(false);
-            this.groupStudents.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numCodes)).EndInit();
             this.ResumeLayout(false);
@@ -214,19 +213,20 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnGenerateFromFile;
-        private System.Windows.Forms.Button btnGenerateSingle;
+        private System.Windows.Forms.Button btnSelectStudents;
         private System.Windows.Forms.GroupBox groupWelcome;
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.GroupBox groupStudents;
         private System.Windows.Forms.NumericUpDown numCodes;
         private System.Windows.Forms.Label lblCodes;
         private System.Windows.Forms.Button btnGenerate;
-        private EditableListView listViewStudents;
+        private ListView listViewStudents;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
-        private System.Windows.Forms.TextBox txtListEdit;
         private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }
 

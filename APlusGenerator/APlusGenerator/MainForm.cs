@@ -12,50 +12,22 @@ namespace APlusGenerator
 {
     public partial class MainForm : Form
     {
-        public static TextBox TxtListEdit;
         public List<Student> Students = new List<Student>();
 
         public MainForm()
         {
             InitializeComponent();
-            TxtListEdit = txtListEdit;
         }
 
-        private void btnGenerateFromFile_Click(object sender, EventArgs e)
+        private void btnSelectStudents_Click(object sender, EventArgs e)
         {
-            //TODO: Implement threaded loading
-            var openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Text files|*.txt";
-            openFileDialog.Title = "Select list to load...";
-
-            if (openFileDialog.ShowDialog() != DialogResult.OK || !openFileDialog.CheckFileExists)
-                return;
-
-            string[] list = Regex.Split(File.ReadAllText(openFileDialog.FileName, Encoding.UTF8).Trim(), Environment.NewLine);
-
-            try
-            {
-                foreach (string line in list)
-                    Students.Add(new Student(line));
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
+            new SelectStudentsForm(this).ShowDialog();
             UpdateStudentsList();
-        }
-
-        private void btnGenerateSingle_Click(object sender, EventArgs e)
-        {
-            new SingleStudentForm(this).ShowDialog();
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            btnGenerateFromFile.Enabled = false;
-            btnGenerateSingle.Enabled = false;
+            btnSelectStudents.Enabled = false;
             btnGenerate.Enabled = false;
 
             try
@@ -64,20 +36,20 @@ namespace APlusGenerator
                 taskFactory.StartNew(() =>
                 {
                     var folderDialog = new FolderBrowserDialog();
-                    int state = 0;
+                    int resultState = 0;
 
                     this.BeginInvoke(new MethodInvoker(() =>
                     {
                         if (folderDialog.ShowDialog() != DialogResult.OK || !Directory.Exists(folderDialog.SelectedPath))
-                            state = -1;
+                            resultState = -1;
                         else
-                            state = 1;
+                            resultState = 1;
                     }));
 
-                    while (state == 0)
+                    while (resultState == 0)
                         Thread.Sleep(100);
 
-                    if (state == -1)
+                    if (resultState == -1)
                         return;
 
                     string folder = folderDialog.SelectedPath;
@@ -109,8 +81,7 @@ namespace APlusGenerator
             }
             finally
             {
-                btnGenerateFromFile.Enabled = true;
-                btnGenerateSingle.Enabled = true;
+                btnSelectStudents.Enabled = true;
                 btnGenerate.Enabled = true;
             }    
         }
@@ -123,9 +94,10 @@ namespace APlusGenerator
                 listViewStudents.Items.RemoveAt(0);
 
             foreach (var student in Students)
-                listViewStudents.Items.Add(new ListViewItem(new[] { student.EMail }));
+                listViewStudents.Items.Add(new ListViewItem(new[] { student.EMail, student.FirstName, student.LastName, student.Class }));
 
-            listViewStudents.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            foreach (ColumnHeader column in listViewStudents.Columns)
+                column.Width = -2;
 
             listViewStudents.EndUpdate();
         }

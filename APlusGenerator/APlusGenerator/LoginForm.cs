@@ -39,6 +39,7 @@ namespace APlusGenerator
             if (reply != "Login success!")
             {
                 MessageBox.Show(reply, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Cleanup();
                 return;
             }
 
@@ -50,14 +51,24 @@ namespace APlusGenerator
             if (reply != "admin")
             {
                 MessageBox.Show("Account is not administrator!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Cleanup();
                 return;
             }
 
             this.BeginInvoke(new MethodInvoker(delegate
             {
+                var mainForm = new MainForm();
+                this.Owner = mainForm;
                 this.Hide();
-                new MainForm().ShowDialog();
+
+                mainForm.ShowDialog();
             }));
+        }
+
+        private void Cleanup()
+        {
+            this.BeginInvoke(new MethodInvoker(() => txtPassword.Text = string.Empty));
+            WebFunctions.ClearCookies();
         }
     }
 }
