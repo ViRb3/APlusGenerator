@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -27,39 +25,22 @@ namespace APlusGenerator
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            btnSelectStudents.Enabled = false;
+            groupWelcome.Enabled = false;
             btnGenerate.Enabled = false;
 
-            try
+            new TaskFactory().StartNew(() =>
             {
-                var taskFactory = new TaskFactory();
-                taskFactory.StartNew(() =>
+                try
                 {
                     var folderDialog = new FolderBrowserDialog();
-                    int resultState = 0;
 
-                    this.BeginInvoke(new MethodInvoker(() =>
-                    {
-                        if (folderDialog.ShowDialog() != DialogResult.OK || !Directory.Exists(folderDialog.SelectedPath))
-                            resultState = -1;
-                        else
-                            resultState = 1;
-                    }));
-
-                    while (resultState == 0)
-                        Thread.Sleep(100);
-
-                    if (resultState == -1)
+                    if (!(bool) this.Invoke(new Func<bool>(() => folderDialog.ShowDialog() == DialogResult.OK)))
                         return;
 
                     string folder = folderDialog.SelectedPath;
 
                     var generator = new Generator(Students);
-                    int codesCount = -1;
-                    numCodes.BeginInvoke(new MethodInvoker(() => codesCount = Convert.ToInt32(numCodes.Value)));
-
-                    while (codesCount == -1)
-                        Thread.Sleep(100);
+                    int codesCount = (int) numCodes.Invoke(new Func<int>(() => Convert.ToInt32(numCodes.Value)));
 
                     Tuple<Student, Bitmap[]>[] codes = generator.Generate(codesCount);
 
@@ -77,13 +58,16 @@ namespace APlusGenerator
                     }
 
                     MessageBox.Show("All done!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                });
-            }
-            finally
-            {
-                btnSelectStudents.Enabled = true;
-                btnGenerate.Enabled = true;
-            }    
+                }
+                finally
+                {
+                    this.BeginInvoke((MethodInvoker) delegate
+                    {
+                        groupWelcome.Enabled = true;
+                        btnGenerate.Enabled = true;
+                    });
+                }
+            });
         }
 
         public void UpdateStudentsList()
@@ -94,7 +78,8 @@ namespace APlusGenerator
                 listViewStudents.Items.RemoveAt(0);
 
             foreach (var student in Students)
-                listViewStudents.Items.Add(new ListViewItem(new[] { student.EMail, student.FirstName, student.LastName, student.Class }));
+                if (listViewStudents.Items.Cast<ListViewItem>().Count(item => item.SubItems[0].Text == student.EMail) == 0)
+                    listViewStudents.Items.Add(new ListViewItem(new[] {student.EMail, student.FirstName, student.LastName, student.Class}));
 
             foreach (ColumnHeader column in listViewStudents.Columns)
                 column.Width = -2;
@@ -104,14 +89,19 @@ namespace APlusGenerator
 
         private void removeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listViewStudents.SelectedItems.Count < 1) 
+            if (listViewStudents.SelectedItems.Count < 1)
                 return;
 
             foreach (ListViewItem item in listViewStudents.SelectedItems)
             {
                 Students.RemoveAt(item.Index);
-                item.Remove();  
+                item.Remove();
             }
+        }
+
+        private void btnManageAccounts_Click(object sender, EventArgs e)
+        {
+            new ManageAccountsForm().ShowDialog();
         }
     }
 }

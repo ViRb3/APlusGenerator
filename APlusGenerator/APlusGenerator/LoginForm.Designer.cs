@@ -50,16 +50,16 @@
             // txtPassword
             // 
             resources.ApplyResources(this.txtPassword, "txtPassword");
-            this.txtPassword.ForeColor = System.Drawing.Color.Gray;
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.WatermarkColor = System.Drawing.Color.Gray;
             this.txtPassword.WatermarkText = "Password";
             // 
             // txtEmail
             // 
             resources.ApplyResources(this.txtEmail, "txtEmail");
-            this.txtEmail.ForeColor = System.Drawing.Color.Gray;
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.WatermarkText = "E-mail";
+            this.txtEmail.WatermarkColor = System.Drawing.Color.Gray;
+            this.txtEmail.WatermarkText = "E-Mail";
             // 
             // LoginForm
             // 

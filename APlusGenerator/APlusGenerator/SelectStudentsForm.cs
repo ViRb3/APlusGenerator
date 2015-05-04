@@ -24,7 +24,7 @@ namespace APlusGenerator
             data.Add("getstudents", "");
 
             string reply = WebFunctions.Request(data);
-            string[] students = Regex.Split(reply, Environment.NewLine);
+            string[] students = Regex.Split(reply, "\n").TrimArray();
 
             foreach (string student in students)
             {

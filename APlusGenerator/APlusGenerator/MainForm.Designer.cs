@@ -33,7 +33,6 @@ namespace APlusGenerator
             this.components = new System.ComponentModel.Container();
             this.btnSelectStudents = new System.Windows.Forms.Button();
             this.groupWelcome = new System.Windows.Forms.GroupBox();
-            this.lblWelcome = new System.Windows.Forms.Label();
             this.groupStudents = new System.Windows.Forms.GroupBox();
             this.listViewStudents = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -45,6 +44,7 @@ namespace APlusGenerator
             this.numCodes = new System.Windows.Forms.NumericUpDown();
             this.lblCodes = new System.Windows.Forms.Label();
             this.btnGenerate = new System.Windows.Forms.Button();
+            this.btnManageAccounts = new System.Windows.Forms.Button();
             this.groupWelcome.SuspendLayout();
             this.groupStudents.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -53,9 +53,10 @@ namespace APlusGenerator
             // 
             // btnSelectStudents
             // 
-            this.btnSelectStudents.Location = new System.Drawing.Point(68, 45);
+            this.btnSelectStudents.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSelectStudents.Location = new System.Drawing.Point(182, 17);
             this.btnSelectStudents.Name = "btnSelectStudents";
-            this.btnSelectStudents.Size = new System.Drawing.Size(168, 28);
+            this.btnSelectStudents.Size = new System.Drawing.Size(132, 46);
             this.btnSelectStudents.TabIndex = 0;
             this.btnSelectStudents.Text = "Select students";
             this.btnSelectStudents.UseVisualStyleBackColor = true;
@@ -65,22 +66,13 @@ namespace APlusGenerator
             // 
             this.groupWelcome.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupWelcome.Controls.Add(this.lblWelcome);
+            this.groupWelcome.Controls.Add(this.btnManageAccounts);
             this.groupWelcome.Controls.Add(this.btnSelectStudents);
             this.groupWelcome.Location = new System.Drawing.Point(12, 12);
             this.groupWelcome.Name = "groupWelcome";
-            this.groupWelcome.Size = new System.Drawing.Size(328, 87);
+            this.groupWelcome.Size = new System.Drawing.Size(328, 75);
             this.groupWelcome.TabIndex = 3;
             this.groupWelcome.TabStop = false;
-            // 
-            // lblWelcome
-            // 
-            this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Location = new System.Drawing.Point(6, 16);
-            this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(282, 13);
-            this.lblWelcome.TabIndex = 0;
-            this.lblWelcome.Text = "You can select students to generate codes for from below:";
             // 
             // groupStudents
             // 
@@ -188,6 +180,17 @@ namespace APlusGenerator
             this.btnGenerate.UseVisualStyleBackColor = true;
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
+            // btnManageAccounts
+            // 
+            this.btnManageAccounts.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnManageAccounts.Location = new System.Drawing.Point(15, 17);
+            this.btnManageAccounts.Name = "btnManageAccounts";
+            this.btnManageAccounts.Size = new System.Drawing.Size(132, 46);
+            this.btnManageAccounts.TabIndex = 1;
+            this.btnManageAccounts.Text = "Manage accounts";
+            this.btnManageAccounts.UseVisualStyleBackColor = true;
+            this.btnManageAccounts.Click += new System.EventHandler(this.btnManageAccounts_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -202,7 +205,6 @@ namespace APlusGenerator
             this.ShowIcon = false;
             this.Text = "APlus QR Generator ~ViRb3";
             this.groupWelcome.ResumeLayout(false);
-            this.groupWelcome.PerformLayout();
             this.groupStudents.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numCodes)).EndInit();
@@ -215,7 +217,6 @@ namespace APlusGenerator
 
         private System.Windows.Forms.Button btnSelectStudents;
         private System.Windows.Forms.GroupBox groupWelcome;
-        private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.GroupBox groupStudents;
         private System.Windows.Forms.NumericUpDown numCodes;
         private System.Windows.Forms.Label lblCodes;
@@ -227,6 +228,7 @@ namespace APlusGenerator
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
+        private Button btnManageAccounts;
     }
 }
 

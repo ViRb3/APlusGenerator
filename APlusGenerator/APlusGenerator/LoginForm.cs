@@ -55,19 +55,19 @@ namespace APlusGenerator
                 return;
             }
 
-            this.BeginInvoke(new MethodInvoker(delegate
+            this.BeginInvoke((MethodInvoker) delegate
             {
                 var mainForm = new MainForm();
                 this.Owner = mainForm;
                 this.Hide();
 
                 mainForm.ShowDialog();
-            }));
+            });
         }
 
         private void Cleanup()
         {
-            this.BeginInvoke(new MethodInvoker(() => txtPassword.Text = string.Empty));
+            this.BeginInvoke((MethodInvoker) delegate { txtPassword.Text = string.Empty; });
             WebFunctions.ClearCookies();
         }
     }

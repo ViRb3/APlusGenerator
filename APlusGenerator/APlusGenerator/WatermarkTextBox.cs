@@ -6,63 +6,96 @@ namespace APlusGenerator
 {
     class WatermarkTextBox : TextBox
     {
-        private string _watermarkText = "Enter text here";
-        private bool _waterMarked;
+        private Font _originalFont;
+        private Boolean _watermarked;
 
-        private Color _originalColor;
-        private bool _originalItalic;
+        private Color _watermarkColor = Color.Gray;
 
-        public WatermarkTextBox()
+        public Color WatermarkColor
         {
-            if (this.Text == string.Empty)
-                Watermark();
+            get { return _watermarkColor; }
+            set
+            {
+                _watermarkColor = value;
+                this.Invalidate();
+            }
         }
+
+        private string _watermarkText = "Water Mark";
 
         public string WatermarkText
         {
             get { return _watermarkText; }
-            set { _watermarkText = value; }
+            set
+            {
+                _watermarkText = value;
+                this.Invalidate();
+            }
         }
 
-        protected override void OnGotFocus(EventArgs e)
+
+        public WatermarkTextBox()
         {
-            if (_waterMarked)
+            HookEvents();
+        }
+
+        protected override void OnCreateControl()
+        {
+            base.OnCreateControl();
+            Toggle(null, null);
+        }
+
+        protected override void OnPaint(PaintEventArgs args)
+        {
+            var drawFont = new Font(this.Font.FontFamily, this.Font.Size, this.Font.Style, this.Font.Unit);
+            var drawBrush = new SolidBrush(WatermarkColor);
+            args.Graphics.DrawString((_watermarked ? WatermarkText : this.Text),
+                drawFont, drawBrush, new PointF(0.0F, 0.0F));
+
+            base.OnPaint(args);
+        }
+
+        private void HookEvents()
+        {
+            this.TextChanged += Toggle;
+            this.LostFocus += Toggle;
+            this.FontChanged += WaterMark_FontChanged;
+        }
+
+        private void Toggle(object sender, EventArgs args)
+        {
+            if (this.Text.Length <= 0)
+                DoWatermark();
+            else
                 DeWatermark();
-
-            base.OnGotFocus(e);
         }
 
-        protected override void OnLostFocus(EventArgs e)
+        private void DoWatermark()
         {
-            if (this.Text == string.Empty)
-                Watermark();
+            _originalFont = new Font(this.Font.FontFamily, this.Font.Size, this.Font.Style, this.Font.Unit);
+            this.SetStyle(ControlStyles.UserPaint, true);
 
-            base.OnLostFocus(e);
-        }
-
-        private void Watermark()
-        {
-            _originalColor = this.ForeColor;
-            _originalItalic = this.Font.Italic;
-
-            if (!_originalItalic)
-                this.Font = new Font(this.Font.FontFamily, this.Font.Size, this.Font.Style | FontStyle.Italic, this.Font.Unit, this.Font.GdiCharSet);
-
-            this.ForeColor = Color.Gray;
-            this.Text = _watermarkText;
-
-            _waterMarked = true;
+            _watermarked = true;
+            this.Refresh();
         }
 
         private void DeWatermark()
         {
-            if (!_originalItalic)
-                this.Font = new Font(this.Font.FontFamily, this.Font.Size, this.Font.Style & ~FontStyle.Italic, this.Font.Unit, this.Font.GdiCharSet);
+            this.SetStyle(ControlStyles.UserPaint, false);
 
-            this.ForeColor = _originalColor;
-            this.Text = string.Empty;
+            if (_originalFont != null)
+                this.Font = new Font(_originalFont.FontFamily, _originalFont.Size, _originalFont.Style, _originalFont.Unit);
 
-            _waterMarked = false;
+            _watermarked = false;
+        }
+
+        private void WaterMark_FontChanged(object sender, EventArgs args)
+        {
+            if (_watermarked)
+            {
+                _originalFont = new Font(this.Font.FontFamily, this.Font.Size, this.Font.Style, this.Font.Unit);
+                this.Refresh();
+            }
         }
     }
 }
