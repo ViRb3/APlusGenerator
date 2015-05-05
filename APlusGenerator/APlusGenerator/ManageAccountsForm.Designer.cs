@@ -32,12 +32,12 @@
             this.chkViewStudents = new System.Windows.Forms.CheckBox();
             this.groupViewOptions = new System.Windows.Forms.GroupBox();
             this.btnNote = new System.Windows.Forms.Button();
-            this.txtClass = new APlusGenerator.WatermarkTextBox();
             this.chkViewTeachers = new System.Windows.Forms.CheckBox();
             this.chkViewUnactivated = new System.Windows.Forms.CheckBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.txtClass = new APlusGenerator.WatermarkTextBox();
             this.editableListViewAccounts = new APlusGenerator.EditableListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -92,15 +92,6 @@
             this.btnNote.Text = "!";
             this.btnNote.UseVisualStyleBackColor = true;
             this.btnNote.Click += new System.EventHandler(this.btnNote_Click);
-            // 
-            // txtClass
-            // 
-            this.txtClass.Location = new System.Drawing.Point(6, 19);
-            this.txtClass.Name = "txtClass";
-            this.txtClass.Size = new System.Drawing.Size(100, 20);
-            this.txtClass.TabIndex = 3;
-            this.txtClass.WatermarkColor = System.Drawing.Color.Gray;
-            this.txtClass.WatermarkText = "Class";
             // 
             // chkViewTeachers
             // 
@@ -159,6 +150,15 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
+            // txtClass
+            // 
+            this.txtClass.Location = new System.Drawing.Point(6, 19);
+            this.txtClass.Name = "txtClass";
+            this.txtClass.Size = new System.Drawing.Size(100, 20);
+            this.txtClass.TabIndex = 3;
+            this.txtClass.WatermarkColor = System.Drawing.Color.Gray;
+            this.txtClass.WatermarkText = "Class";
+            // 
             // editableListViewAccounts
             // 
             this.editableListViewAccounts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -171,6 +171,7 @@
             this.columnHeader4,
             this.columnHeader5,
             this.columnHeader6});
+            this.editableListViewAccounts.FullRowSelect = true;
             this.editableListViewAccounts.Location = new System.Drawing.Point(12, 83);
             this.editableListViewAccounts.Name = "editableListViewAccounts";
             this.editableListViewAccounts.Size = new System.Drawing.Size(483, 306);
@@ -218,6 +219,7 @@
             this.Controls.Add(this.groupViewOptions);
             this.Controls.Add(this.txtListViewEdit);
             this.Controls.Add(this.editableListViewAccounts);
+            this.MinimumSize = new System.Drawing.Size(518, 436);
             this.Name = "ManageAccountsForm";
             this.ShowIcon = false;
             this.Text = "Manage Accounts";

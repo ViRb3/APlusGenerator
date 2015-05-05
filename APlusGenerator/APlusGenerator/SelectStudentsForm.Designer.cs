@@ -38,6 +38,9 @@ namespace APlusGenerator
             this.btnApply = new System.Windows.Forms.Button();
             this.btnSelectAll = new System.Windows.Forms.Button();
             this.btnDeselectAll = new System.Windows.Forms.Button();
+            this.btnNote = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.txtClass = new APlusGenerator.WatermarkTextBox();
             this.SuspendLayout();
             // 
             // listViewStudents
@@ -53,9 +56,9 @@ namespace APlusGenerator
             this.columnHeader4});
             this.listViewStudents.FullRowSelect = true;
             this.listViewStudents.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listViewStudents.Location = new System.Drawing.Point(12, 12);
+            this.listViewStudents.Location = new System.Drawing.Point(12, 39);
             this.listViewStudents.Name = "listViewStudents";
-            this.listViewStudents.Size = new System.Drawing.Size(360, 336);
+            this.listViewStudents.Size = new System.Drawing.Size(360, 309);
             this.listViewStudents.TabIndex = 1;
             this.listViewStudents.TabStop = false;
             this.listViewStudents.UseCompatibleStateImageBehavior = false;
@@ -111,20 +114,55 @@ namespace APlusGenerator
             this.btnDeselectAll.UseVisualStyleBackColor = true;
             this.btnDeselectAll.Click += new System.EventHandler(this.btnDeselectAll_Click);
             // 
+            // btnNote
+            // 
+            this.btnNote.Location = new System.Drawing.Point(112, 11);
+            this.btnNote.Name = "btnNote";
+            this.btnNote.Size = new System.Drawing.Size(16, 22);
+            this.btnNote.TabIndex = 6;
+            this.btnNote.Text = "!";
+            this.btnNote.UseVisualStyleBackColor = true;
+            this.btnNote.Click += new System.EventHandler(this.btnNote_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRefresh.Location = new System.Drawing.Point(297, 10);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 7;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // txtClass
+            // 
+            this.txtClass.Location = new System.Drawing.Point(12, 12);
+            this.txtClass.Name = "txtClass";
+            this.txtClass.Size = new System.Drawing.Size(100, 20);
+            this.txtClass.TabIndex = 5;
+            this.txtClass.WatermarkColor = System.Drawing.Color.Gray;
+            this.txtClass.WatermarkText = "Class";
+            // 
             // SelectStudentsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 389);
+            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.btnNote);
+            this.Controls.Add(this.txtClass);
             this.Controls.Add(this.btnDeselectAll);
             this.Controls.Add(this.btnSelectAll);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.listViewStudents);
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(400, 428);
             this.Name = "SelectStudentsForm";
             this.ShowIcon = false;
             this.Text = "Select Students";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -138,6 +176,9 @@ namespace APlusGenerator
         private Button btnApply;
         private Button btnSelectAll;
         private Button btnDeselectAll;
+        private Button btnNote;
+        private WatermarkTextBox txtClass;
+        private Button btnRefresh;
 
     }
 }

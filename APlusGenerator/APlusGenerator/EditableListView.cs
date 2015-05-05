@@ -27,6 +27,9 @@ namespace APlusGenerator
 
         public void SaveCurrentData()
         {
+            if (this.Items.Count < 1)
+                return;
+
             _originalData =
                 new string[this.Items.Count, (from ListViewItem item in this.Items select item.SubItems.Count).Max()];
 

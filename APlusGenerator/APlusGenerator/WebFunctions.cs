@@ -28,7 +28,7 @@ namespace APlusGenerator
 			
 		public static void ClearCookies()
 		{
-			WebClient.CookieJar = new CookieContainer ();
+			WebClient.CookieJar = new CookieContainer();
 		}			
 	}
 
@@ -47,7 +47,7 @@ namespace APlusGenerator
 
 			if (request != null)
 			{
-				request.Method = "Post";
+				request.Method = "POST";
 				request.CookieContainer = CookieJar;
 			}
 

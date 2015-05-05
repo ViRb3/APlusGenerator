@@ -30,7 +30,7 @@ namespace APlusGenerator
             var data = new NameValueCollection();
             data.Add("getaccounts", "");
 
-            string @class = txtClass.Text.Trim();
+            string @class = txtClass.Text.ToUpper().Trim();
 
             if (!string.IsNullOrWhiteSpace(@class))
                 data.Add("class", @class);

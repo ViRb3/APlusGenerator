@@ -46,7 +46,8 @@ namespace APlusGenerator
 
                     foreach (Tuple<Student, Bitmap[]> studentCodes in codes)
                     {
-                        string newFolder = Path.Combine(folder, studentCodes.Item1.EMail);
+                        string newFolder = Path.Combine(folder, string.Format("{0} {1} {2}", studentCodes.Item1.FirstName, 
+                            studentCodes.Item1.LastName, studentCodes.Item1.Class));
 
                         Directory.CreateDirectory(newFolder);
 
@@ -72,6 +73,9 @@ namespace APlusGenerator
 
         public void UpdateStudentsList()
         {
+            if (listViewStudents.Items.Count == 0 && Students.Count == 0)
+                return;
+
             listViewStudents.BeginUpdate();
 
             while (listViewStudents.Items.Count > 0)
