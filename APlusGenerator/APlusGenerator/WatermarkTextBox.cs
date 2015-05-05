@@ -21,7 +21,7 @@ namespace APlusGenerator
             }
         }
 
-        private string _watermarkText = "Water Mark";
+        private string _watermarkText = "Enter text here";
 
         public string WatermarkText
         {

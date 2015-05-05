@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace APlusGenerator
@@ -8,19 +9,57 @@ namespace APlusGenerator
     {
         private const int WM_HSCROLL = 0x114;
         private const int WM_VSCROLL = 0x115;
-
-        public TextBox TxtListEdit
-        {
-            get { return ManageAccountsForm.TxtListEdit; }
-        }
-
         private Point _dragPoint;
+        private EventHandler _lostFocusHandler;
+        private string[,] _originalData;
         private ListViewItem.ListViewSubItem _selectedItem;
         private bool _updating;
 
         public EditableListView()
         {
             this.View = View.Details;
+        }
+
+        public TextBox TxtListEdit
+        {
+            get { return ManageAccountsForm.TxtListEdit; }
+        }
+
+        public void SaveCurrentData()
+        {
+            _originalData =
+                new string[this.Items.Count, (from ListViewItem item in this.Items select item.SubItems.Count).Max()];
+
+            for (var i = 0; i < this.Items.Count; i++)
+            {
+                ListViewItem item = this.Items[i];
+
+                for (var o = 0; o < item.SubItems.Count; o++)
+                {
+                    ListViewItem.ListViewSubItem subItem = item.SubItems[o];
+                    _originalData[i, o] = subItem.Text;
+                }
+            }
+        }
+
+        public string[,] GetSavedDataChanges()
+        {
+            var deltaData = new string[_originalData.GetUpperBound(0) + 1, _originalData.GetUpperBound(1) + 1];
+
+            for (var i = 0; i < this.Items.Count; i++)
+            {
+                ListViewItem item = this.Items[i];
+
+                for (var o = 0; o < item.SubItems.Count; o++)
+                {
+                    ListViewItem.ListViewSubItem subItem = item.SubItems[o];
+
+                    if (subItem.Text != _originalData[i, o])
+                        deltaData[i, o] = subItem.Text;
+                }
+            }
+
+            return deltaData;
         }
 
         private void HideTextEditor()
@@ -51,6 +90,13 @@ namespace APlusGenerator
                 return;
 
             _updating = true;
+
+            if (_lostFocusHandler == null)
+            {
+                _lostFocusHandler = delegate { HideTextEditor(); };
+
+                TxtListEdit.LostFocus += _lostFocusHandler;
+            }
 
             var border = 0;
             switch (this.BorderStyle)

@@ -32,12 +32,12 @@
             this.chkViewStudents = new System.Windows.Forms.CheckBox();
             this.groupViewOptions = new System.Windows.Forms.GroupBox();
             this.btnNote = new System.Windows.Forms.Button();
+            this.txtClass = new APlusGenerator.WatermarkTextBox();
             this.chkViewTeachers = new System.Windows.Forms.CheckBox();
             this.chkViewUnactivated = new System.Windows.Forms.CheckBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.txtClass = new APlusGenerator.WatermarkTextBox();
             this.editableListViewAccounts = new APlusGenerator.EditableListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -93,6 +93,15 @@
             this.btnNote.UseVisualStyleBackColor = true;
             this.btnNote.Click += new System.EventHandler(this.btnNote_Click);
             // 
+            // txtClass
+            // 
+            this.txtClass.Location = new System.Drawing.Point(6, 19);
+            this.txtClass.Name = "txtClass";
+            this.txtClass.Size = new System.Drawing.Size(100, 20);
+            this.txtClass.TabIndex = 3;
+            this.txtClass.WatermarkColor = System.Drawing.Color.Gray;
+            this.txtClass.WatermarkText = "Class";
+            // 
             // chkViewTeachers
             // 
             this.chkViewTeachers.AutoSize = true;
@@ -124,7 +133,7 @@
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 4;
-            this.btnClose.Text = "Close";
+            this.btnClose.Text = "Discard";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
@@ -149,15 +158,6 @@
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // txtClass
-            // 
-            this.txtClass.Location = new System.Drawing.Point(6, 19);
-            this.txtClass.Name = "txtClass";
-            this.txtClass.Size = new System.Drawing.Size(100, 20);
-            this.txtClass.TabIndex = 3;
-            this.txtClass.WatermarkColor = System.Drawing.Color.Gray;
-            this.txtClass.WatermarkText = "Class";
             // 
             // editableListViewAccounts
             // 

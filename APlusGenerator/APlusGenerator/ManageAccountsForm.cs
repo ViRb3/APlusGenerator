@@ -25,12 +25,14 @@ namespace APlusGenerator
             TxtListEdit = txtListViewEdit;
         }
 
-        private void ListAccounts(string @class)
+        private void ListAccounts()
         {
             var data = new NameValueCollection();
             data.Add("getaccounts", "");
-            
-            if (!string.IsNullOrWhiteSpace(@class.Trim()))
+
+            string @class = txtClass.Text.Trim();
+
+            if (!string.IsNullOrWhiteSpace(@class))
                 data.Add("class", @class);
 
             if (_typeView.HasFlag(ViewType.Student) && !_typeView.HasFlag(ViewType.Teacher))
@@ -101,7 +103,8 @@ namespace APlusGenerator
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            ListAccounts(txtClass.Text);
+            ListAccounts();
+            editableListViewAccounts.SaveCurrentData();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -111,7 +114,7 @@ namespace APlusGenerator
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            //TODO
+            string[,] deltaData = editableListViewAccounts.GetSavedDataChanges();
         }
     }
 }
