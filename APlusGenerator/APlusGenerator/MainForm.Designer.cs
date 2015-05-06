@@ -205,6 +205,7 @@ namespace APlusGenerator
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.Text = "APlus QR Generator ~ViRb3";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.groupWelcome.ResumeLayout(false);
             this.groupStudents.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);

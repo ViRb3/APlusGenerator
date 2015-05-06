@@ -47,7 +47,11 @@ namespace APlusGenerator
 
         public string[,] GetSavedDataChanges()
         {
+            if (_originalData == null)
+                return null;
+
             var deltaData = new string[_originalData.GetUpperBound(0) + 1, _originalData.GetUpperBound(1) + 1];
+            int changes = 0;
 
             for (var i = 0; i < this.Items.Count; i++)
             {
@@ -58,9 +62,15 @@ namespace APlusGenerator
                     ListViewItem.ListViewSubItem subItem = item.SubItems[o];
 
                     if (subItem.Text != _originalData[i, o])
+                    {
                         deltaData[i, o] = subItem.Text;
+                        changes++;
+                    }
                 }
             }
+
+            if (changes == 0)
+                return null;
 
             return deltaData;
         }

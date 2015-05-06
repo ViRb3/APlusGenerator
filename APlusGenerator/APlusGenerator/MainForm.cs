@@ -107,5 +107,17 @@ namespace APlusGenerator
         {
             new ManageAccountsForm().ShowDialog();
         }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (listViewStudents.Items.Count < 1)
+                return;
+
+            if (MessageBox.Show("Are you sure you want to exit the application?", "Warning",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

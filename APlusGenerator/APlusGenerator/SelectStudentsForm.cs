@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -9,49 +10,12 @@ namespace APlusGenerator
     public partial class SelectStudentsForm : Form
     {
         private readonly MainForm _mainForm;
-        private string _class;
 
         public SelectStudentsForm(MainForm mainForm)
         {
             _mainForm = mainForm;
 
             InitializeComponent();
-        }
-
-        private void ListStudents()
-        {
-            var data = new NameValueCollection();
-            data.Add("getstudents", "");
-
-            string @class = txtClass.Text.ToUpper().Trim();
-
-            if (!string.IsNullOrWhiteSpace(@class))
-                data.Add("class", @class);
-
-            string reply = WebFunctions.Request(data);
-            string[] students = Regex.Split(reply, "\n").TrimArray();
-
-            listViewStudents.BeginUpdate();
-
-            listViewStudents.Items.Clear();
-
-            foreach (string student in students)
-            {
-                string[] studentInfo = Regex.Split(student, " ");
-
-                if (studentInfo.Length != 4 || !student.Contains("@"))
-                {
-                    MessageBox.Show(reply, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                listViewStudents.Items.Add(new ListViewItem(new[] { studentInfo[0], studentInfo[1], studentInfo[2], studentInfo[3] }));
-
-                foreach (ColumnHeader column in listViewStudents.Columns)
-                    column.Width = -2;
-            }
-
-            listViewStudents.EndUpdate();
         }
 
         private void btnSelectAll_Click(object sender, EventArgs e)
@@ -78,7 +42,58 @@ namespace APlusGenerator
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            ListStudents();
+            var refreshWorker = new BackgroundWorker();
+            refreshWorker.DoWork += refreshWorker_DoWork;
+            refreshWorker.RunWorkerCompleted += refreshWorker_RunWorkerCompleted;
+
+            btnRefresh.Enabled = false;
+            refreshWorker.RunWorkerAsync();
+        }
+
+        void refreshWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            object[] result = (object[]) e.Result;
+            string[] students = (string[])result[0];
+            string reply = (string) result[1];
+
+            listViewStudents.BeginUpdate();
+
+            listViewStudents.Items.Clear();
+
+            foreach (string student in students)
+            {
+                string[] studentInfo = Regex.Split(student, " ");
+
+                if (studentInfo.Length != 4 || !student.Contains("@"))
+                {
+                    MessageBox.Show(reply, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
+
+                listViewStudents.Items.Add(new ListViewItem(new[] { studentInfo[0], studentInfo[1], studentInfo[2], studentInfo[3] }));
+
+                foreach (ColumnHeader column in listViewStudents.Columns)
+                    column.Width = -2;
+            }
+
+            listViewStudents.EndUpdate();
+            btnRefresh.Enabled = true;
+        }
+
+        void refreshWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var data = new NameValueCollection();
+            data.Add("getstudents", "");
+
+            string @class = txtClass.Text.ToUpper().Trim();
+
+            if (!string.IsNullOrWhiteSpace(@class))
+                data.Add("class", @class);
+
+            string reply = WebFunctions.Request(data);
+            string[] students = Regex.Split(reply, "\n").TrimArray();
+
+            e.Result = new object[] {students, reply};
         }
 
         private void btnNote_Click(object sender, EventArgs e)
