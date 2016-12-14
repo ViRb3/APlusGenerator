@@ -25,6 +25,9 @@ namespace APlusGenerator
         {
             InitializeComponent();
             TxtListEdit = txtListViewEdit;
+
+            Program.ScaleForm(this);
+            Program.SizeListViewColumns(editableListViewAccounts);
         }
 
         private void btnNote_Click(object sender, EventArgs e)

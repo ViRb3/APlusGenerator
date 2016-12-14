@@ -51,6 +51,7 @@
             // 
             resources.ApplyResources(this.txtPassword, "txtPassword");
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.WatermarkColor = System.Drawing.Color.Gray;
             this.txtPassword.WatermarkText = "Password";
             // 
@@ -59,7 +60,7 @@
             resources.ApplyResources(this.txtEmail, "txtEmail");
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.WatermarkColor = System.Drawing.Color.Gray;
-            this.txtEmail.WatermarkText = "E-Mail";
+            this.txtEmail.WatermarkText = "E-mail";
             // 
             // LoginForm
             // 

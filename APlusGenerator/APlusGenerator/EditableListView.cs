@@ -36,7 +36,6 @@ namespace APlusGenerator
             for (var i = 0; i < this.Items.Count; i++)
             {
                 ListViewItem item = this.Items[i];
-
                 for (var o = 0; o < item.SubItems.Count; o++)
                 {
                     ListViewItem.ListViewSubItem subItem = item.SubItems[o];
@@ -56,11 +55,9 @@ namespace APlusGenerator
             for (var i = 0; i < this.Items.Count; i++)
             {
                 ListViewItem item = this.Items[i];
-
                 for (var o = 0; o < item.SubItems.Count; o++)
                 {
                     ListViewItem.ListViewSubItem subItem = item.SubItems[o];
-
                     if (subItem.Text != _originalData[i, o])
                     {
                         deltaData[i, o] = subItem.Text;
@@ -92,7 +89,6 @@ namespace APlusGenerator
         {
             if (e.Button != MouseButtons.Left || this.SelectedItems.Count > 1)
                 return;
-
             if (_dragPoint == default(Point) || _dragPoint != new Point(e.X, e.Y))
                 return;
 
@@ -107,7 +103,6 @@ namespace APlusGenerator
             if (_lostFocusHandler == null)
             {
                 _lostFocusHandler = delegate { HideTextEditor(); };
-
                 TxtListEdit.LostFocus += _lostFocusHandler;
             }
 

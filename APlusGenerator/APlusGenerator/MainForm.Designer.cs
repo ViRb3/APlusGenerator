@@ -55,10 +55,10 @@ namespace APlusGenerator
             // 
             this.btnSelectStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelectStudents.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSelectStudents.Location = new System.Drawing.Point(182, 17);
+            this.btnSelectStudents.Location = new System.Drawing.Point(211, 17);
             this.btnSelectStudents.Name = "btnSelectStudents";
             this.btnSelectStudents.Size = new System.Drawing.Size(132, 46);
-            this.btnSelectStudents.TabIndex = 0;
+            this.btnSelectStudents.TabIndex = 2;
             this.btnSelectStudents.Text = "Select students";
             this.btnSelectStudents.UseVisualStyleBackColor = true;
             this.btnSelectStudents.Click += new System.EventHandler(this.btnSelectStudents_Click);
@@ -71,7 +71,7 @@ namespace APlusGenerator
             this.groupWelcome.Controls.Add(this.btnSelectStudents);
             this.groupWelcome.Location = new System.Drawing.Point(12, 12);
             this.groupWelcome.Name = "groupWelcome";
-            this.groupWelcome.Size = new System.Drawing.Size(328, 75);
+            this.groupWelcome.Size = new System.Drawing.Size(357, 75);
             this.groupWelcome.TabIndex = 3;
             this.groupWelcome.TabStop = false;
             // 
@@ -94,7 +94,7 @@ namespace APlusGenerator
             this.groupStudents.Controls.Add(this.listViewStudents);
             this.groupStudents.Location = new System.Drawing.Point(12, 105);
             this.groupStudents.Name = "groupStudents";
-            this.groupStudents.Size = new System.Drawing.Size(328, 288);
+            this.groupStudents.Size = new System.Drawing.Size(357, 288);
             this.groupStudents.TabIndex = 4;
             this.groupStudents.TabStop = false;
             this.groupStudents.Text = "Students";
@@ -114,8 +114,8 @@ namespace APlusGenerator
             this.listViewStudents.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewStudents.Location = new System.Drawing.Point(6, 19);
             this.listViewStudents.Name = "listViewStudents";
-            this.listViewStudents.Size = new System.Drawing.Size(316, 263);
-            this.listViewStudents.TabIndex = 0;
+            this.listViewStudents.Size = new System.Drawing.Size(345, 263);
+            this.listViewStudents.TabIndex = 3;
             this.listViewStudents.TabStop = false;
             this.listViewStudents.UseCompatibleStateImageBehavior = false;
             this.listViewStudents.View = System.Windows.Forms.View.Details;
@@ -123,39 +123,41 @@ namespace APlusGenerator
             // columnHeader1
             // 
             this.columnHeader1.Text = "E-mail";
+            this.columnHeader1.Width = 40;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "First name";
-            this.columnHeader2.Width = 63;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Last name";
-            this.columnHeader3.Width = 70;
+            this.columnHeader3.Width = 61;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Class";
+            this.columnHeader4.Width = 180;
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.removeToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(118, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(139, 30);
             // 
             // removeToolStripMenuItem
             // 
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
             this.removeToolStripMenuItem.Text = "Remove";
             this.removeToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
             // 
             // numCodes
             // 
             this.numCodes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.numCodes.Location = new System.Drawing.Point(114, 406);
+            this.numCodes.Location = new System.Drawing.Point(127, 406);
             this.numCodes.Maximum = new decimal(new int[] {
             300,
             0,
@@ -163,7 +165,7 @@ namespace APlusGenerator
             0});
             this.numCodes.Name = "numCodes";
             this.numCodes.Size = new System.Drawing.Size(56, 20);
-            this.numCodes.TabIndex = 2;
+            this.numCodes.TabIndex = 4;
             this.numCodes.Value = new decimal(new int[] {
             1,
             0,
@@ -176,17 +178,17 @@ namespace APlusGenerator
             this.lblCodes.AutoSize = true;
             this.lblCodes.Location = new System.Drawing.Point(12, 408);
             this.lblCodes.Name = "lblCodes";
-            this.lblCodes.Size = new System.Drawing.Size(96, 13);
+            this.lblCodes.Size = new System.Drawing.Size(109, 15);
             this.lblCodes.TabIndex = 6;
             this.lblCodes.Text = "Codes per student:";
             // 
             // btnGenerate
             // 
             this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerate.Location = new System.Drawing.Point(253, 403);
+            this.btnGenerate.Location = new System.Drawing.Point(282, 403);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(87, 23);
-            this.btnGenerate.TabIndex = 3;
+            this.btnGenerate.TabIndex = 5;
             this.btnGenerate.Text = "Generate";
             this.btnGenerate.UseVisualStyleBackColor = true;
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
@@ -195,7 +197,7 @@ namespace APlusGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(351, 435);
+            this.ClientSize = new System.Drawing.Size(380, 435);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.lblCodes);
             this.Controls.Add(this.numCodes);
@@ -204,7 +206,7 @@ namespace APlusGenerator
             this.MinimumSize = new System.Drawing.Size(367, 474);
             this.Name = "MainForm";
             this.ShowIcon = false;
-            this.Text = "APlus QR Generator ~ViRb3";
+            this.Text = "APlus QR Generator";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.groupWelcome.ResumeLayout(false);
             this.groupStudents.ResumeLayout(false);

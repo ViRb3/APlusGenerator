@@ -15,6 +15,8 @@ namespace APlusGenerator
         public MainForm()
         {
             InitializeComponent();
+            Program.ScaleForm(this);
+            Program.SizeListViewColumns(listViewStudents);
         }
 
         private void btnSelectStudents_Click(object sender, EventArgs e)

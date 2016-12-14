@@ -59,7 +59,7 @@ namespace APlusGenerator
             this.listViewStudents.Location = new System.Drawing.Point(12, 39);
             this.listViewStudents.Name = "listViewStudents";
             this.listViewStudents.Size = new System.Drawing.Size(360, 309);
-            this.listViewStudents.TabIndex = 1;
+            this.listViewStudents.TabIndex = 4;
             this.listViewStudents.TabStop = false;
             this.listViewStudents.UseCompatibleStateImageBehavior = false;
             this.listViewStudents.View = System.Windows.Forms.View.Details;
@@ -67,6 +67,7 @@ namespace APlusGenerator
             // columnHeader1
             // 
             this.columnHeader1.Text = "E-mail";
+            this.columnHeader1.Width = 40;
             // 
             // columnHeader2
             // 
@@ -75,11 +76,12 @@ namespace APlusGenerator
             // columnHeader3
             // 
             this.columnHeader3.Text = "Last name";
-            this.columnHeader3.Width = 68;
+            this.columnHeader3.Width = 61;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Class";
+            this.columnHeader4.Width = 195;
             // 
             // btnApply
             // 
@@ -87,7 +89,7 @@ namespace APlusGenerator
             this.btnApply.Location = new System.Drawing.Point(284, 354);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(88, 23);
-            this.btnApply.TabIndex = 2;
+            this.btnApply.TabIndex = 7;
             this.btnApply.Text = "Apply";
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
@@ -98,7 +100,7 @@ namespace APlusGenerator
             this.btnSelectAll.Location = new System.Drawing.Point(12, 354);
             this.btnSelectAll.Name = "btnSelectAll";
             this.btnSelectAll.Size = new System.Drawing.Size(88, 23);
-            this.btnSelectAll.TabIndex = 2;
+            this.btnSelectAll.TabIndex = 5;
             this.btnSelectAll.Text = "Select all";
             this.btnSelectAll.UseVisualStyleBackColor = true;
             this.btnSelectAll.Click += new System.EventHandler(this.btnSelectAll_Click);
@@ -109,7 +111,7 @@ namespace APlusGenerator
             this.btnDeselectAll.Location = new System.Drawing.Point(106, 354);
             this.btnDeselectAll.Name = "btnDeselectAll";
             this.btnDeselectAll.Size = new System.Drawing.Size(88, 23);
-            this.btnDeselectAll.TabIndex = 2;
+            this.btnDeselectAll.TabIndex = 6;
             this.btnDeselectAll.Text = "Deselect all";
             this.btnDeselectAll.UseVisualStyleBackColor = true;
             this.btnDeselectAll.Click += new System.EventHandler(this.btnDeselectAll_Click);
@@ -119,7 +121,7 @@ namespace APlusGenerator
             this.btnNote.Location = new System.Drawing.Point(112, 11);
             this.btnNote.Name = "btnNote";
             this.btnNote.Size = new System.Drawing.Size(16, 22);
-            this.btnNote.TabIndex = 6;
+            this.btnNote.TabIndex = 2;
             this.btnNote.Text = "!";
             this.btnNote.UseVisualStyleBackColor = true;
             this.btnNote.Click += new System.EventHandler(this.btnNote_Click);
@@ -130,7 +132,7 @@ namespace APlusGenerator
             this.btnRefresh.Location = new System.Drawing.Point(297, 10);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnRefresh.TabIndex = 7;
+            this.btnRefresh.TabIndex = 3;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
@@ -140,7 +142,7 @@ namespace APlusGenerator
             this.txtClass.Location = new System.Drawing.Point(12, 12);
             this.txtClass.Name = "txtClass";
             this.txtClass.Size = new System.Drawing.Size(100, 20);
-            this.txtClass.TabIndex = 5;
+            this.txtClass.TabIndex = 1;
             this.txtClass.WatermarkColor = System.Drawing.Color.Gray;
             this.txtClass.WatermarkText = "Class";
             // 
